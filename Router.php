@@ -1,7 +1,7 @@
 <?php
-    require_once 'Controller/TasksController.php';
-    require_once 'Controller/TasksAdvanceController.php';
-    require_once 'Controller/UserController.php';
+    require_once 'controller/ActivitiesController.php';
+    // require_once 'Controller/TasksAdvanceController.php';
+    // require_once 'Controller/UserController.php';
     require_once 'RouterClass.php';
     
     // CONSTANTES PARA RUTEO
