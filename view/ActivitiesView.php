@@ -1,21 +1,28 @@
 <?php
+
+use function PHPSTORM_META\type;
+
 require_once "./libs/smarty/Smarty.class.php";
 
 class ActivitiesView {
 
-    function __construct() {
+    private $title;
 
+    function __construct() {
+        $this->title = "Let's Travel!!";
     }
 
-    function showTasks($tasks) {
+    function showActivities($activities) {
         $smarty = new Smarty();
-        $smarty->assign('tareas_s', $tasks);
+        $smarty->assign('title', $this->title);
+        $smarty->assign('activities', $activities);
         $smarty->display('templates/activities.tpl');
     }
 
-    function showTask($task) {
+    function showActivity($activity) {
         $smarty = new Smarty();
-        $smarty->assign('tareas_s', $task);
+        $smarty->assign('activity', $activity);
+        $smarty->assign('title', $activity->title);
         $smarty->display('templates/activity.tpl');
     }
 }

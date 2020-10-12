@@ -13,7 +13,9 @@
     $r = new Router();
 
     // rutas
-    $r->addRoute("home", "GET", "TasksController", "Home");
+    $r->addRoute("home", "GET", "ActivitiesController", "Home");
+    $r->addRoute("actividad/:ID", "GET", "ActivitiesController", "Activity");
+
     $r->addRoute("login", "GET", "UserController", "Login");
     $r->addRoute("logout", "GET", "UserController", "Logout");
 
@@ -29,7 +31,7 @@
     $r->addRoute("edit/:ID", "GET", "TasksController", "EditTask");
 
     //Ruta por defecto.
-    $r->setDefaultRoute("TasksController", "Home");
+    $r->setDefaultRoute("ActivitiesController", "Home");
 
     //Advance
     $r->addRoute("autocompletar", "GET", "TasksAdvanceController", "AutoCompletar");
