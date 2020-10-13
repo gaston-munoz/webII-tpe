@@ -12,9 +12,18 @@ class ActivitiesController {
         $this->view = new ActivitiesView();
     }
 
-    function Home() {
-        $activities = $this->model->getAll();
-        $this->view->showActivities($activities);
+    function Home($params = null) {
+        var_dump(isset($params['ID']));
+        if(isset($params[':ID'])) {
+            $id = $params[':ID'];
+            $activities = $this->model->getActCategory($id);
+            $this->view->showActCategory($activities);
+        }
+        else {
+           $activities = $this->model->getAll();
+           $this->view->showActivities($activities);
+        }
+
     }
 
     function Activity($params = null) {
@@ -22,4 +31,5 @@ class ActivitiesController {
         $activity = $this->model->getOne($id);
         $this->view->showActivity($activity);
     }
+
 }

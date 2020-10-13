@@ -22,7 +22,7 @@
                         {$activity->price}
                     </td>
                     <td>
-                        <a class='btn btn-info' href='actividad/{$activity->id}'>Ver Actividad</a>
+                        <a class='btn btn-info' href='/TP-WEBII/actividad/{$activity->id}'>Ver Actividad</a>
                     </td>
                 </tr>
             {/foreach} 

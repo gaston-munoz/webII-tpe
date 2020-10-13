@@ -1,6 +1,6 @@
 <?php
     require_once 'controller/ActivitiesController.php';
-    // require_once 'Controller/TasksAdvanceController.php';
+     require_once 'controller/CategoryController.php';
     // require_once 'Controller/UserController.php';
     require_once 'RouterClass.php';
     
@@ -13,8 +13,15 @@
     $r = new Router();
 
     // rutas
+    // mies
     $r->addRoute("home", "GET", "ActivitiesController", "Home");
     $r->addRoute("actividad/:ID", "GET", "ActivitiesController", "Activity");
+
+    $r->addRoute("categorias", "GET", "CategoryController", "IndexCategory");
+    
+    $r->addRoute("categoria/:ID", "GET", "ActivitiesController", "Home"); 
+
+    // end mies
 
     $r->addRoute("login", "GET", "UserController", "Login");
     $r->addRoute("logout", "GET", "UserController", "Logout");
