@@ -1,11 +1,12 @@
-{include file="header.tpl"}
-<div class="container">
+{include file="../layout/header.tpl"}
+<div class="container container-body">
     <table class="table table-bordered table-striped mt-4 mb-5">
         <thead class='table-dark'>
             <tr>
             <th scope="col">Titulo</th>
             <th scope="col">Descripcion</th>
             <th scope="col">Precio</th>
+            <th scope="col">Categoria</th>
             <th scope="col">Ciudad</th>
             </tr>
         </thead>
@@ -22,7 +23,10 @@
                         {$activity->price}
                     </td>
                     <td>
-                        <a class='btn btn-info' href='/TP-WEBII/actividad/{$activity->id}'>Ver Actividad</a>
+                        {$activity->name}
+                    </td>
+                    <td>
+                        <a class='btn btn-info' href='actividad/{$activity->id}'>Ver Actividad</a>
                     </td>
                 </tr>
             {/foreach} 
@@ -30,4 +34,4 @@
     </table>
 </div>
 
-{include file="footer.tpl"}
+{include file="../layout/footer.tpl"}

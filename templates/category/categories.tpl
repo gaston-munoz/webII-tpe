@@ -1,5 +1,5 @@
-{include file="../header.tpl"}
-<div class="container col-md-10">
+{include file="../layout/header.tpl"}
+<div class="container container-body col-md-10">
     <table class="table table-bordered table-striped mt-4 mb-5">
         <thead class='table-dark'>
             <tr>
@@ -19,7 +19,7 @@
                         {$category->description}
                     </td>
                     <td>
-                        <a class='btn btn-success' href='categoria/{$category->id}'>Ver Actividades</a>
+                        <a class='btn btn-success' href='actividades/categoria/{$category->id}'>Ver Actividades</a>
                     </td>
 
                 </tr>
@@ -28,4 +28,4 @@
     </table>
 </div>
 
-{include file="../footer.tpl"}
+{include file="../layout/footer.tpl"}

@@ -1,4 +1,4 @@
-{include file="header.tpl"}
+{include file="../layout/header.tpl"}
     <div class='container mb-5'>
       <div class="jumbotron pt-0 pl-0 pr-0 mb-5">
         <img width='100%' src='{$activity->image}' alt='THE BEST'>
@@ -7,9 +7,9 @@
             <hr class="my-4">
             <div class='d-flex justify-content-center align-items-center mt-5'> 
                 <h3 class='mr-3'>Oferta del dia a solo ${$activity->price}</h3>
-                <a class="btn btn-primary btn-lg ml-3" href="#" role="button">Comprar</a>
+                <span class="btn btn-primary btn-lg ml-3" role="button">Comprar</span>
             </div>
         </div>
       </div>
     </div>
-{include file="footer.tpl"}
+{include file="../layout/footer.tpl"}

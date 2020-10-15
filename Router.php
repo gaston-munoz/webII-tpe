@@ -1,7 +1,7 @@
 <?php
     require_once 'controller/ActivitiesController.php';
-     require_once 'controller/CategoryController.php';
-    // require_once 'Controller/UserController.php';
+    require_once 'controller/CategoryController.php';
+    require_once 'controller/UserController.php';
     require_once 'RouterClass.php';
     
     // CONSTANTES PARA RUTEO
@@ -13,35 +13,45 @@
     $r = new Router();
 
     // rutas
-    // mies
+    // statics (home)
     $r->addRoute("home", "GET", "ActivitiesController", "Home");
+
+    // activities
     $r->addRoute("actividad/:ID", "GET", "ActivitiesController", "Activity");
+    $r->addRoute("actividades/categoria/:ID", "GET", "ActivitiesController", "Home"); 
 
+    $r->addRoute("admin/actividades", "GET", "ActivitiesController", "getAdminActivities");
+    $r->addRoute("nuevaActividad", "POST", "ActivitiesController", "create");
+
+    $r->addRoute("actividades/editar/:ID", "GET", "ActivitiesController", "getEdit");
+    $r->addRoute("actividades/actualizar/:ID", "POST", "ActivitiesController", "update");
+
+    $r->addRoute("actividades/eliminar/:ID", "GET", "ActivitiesController", "getDelete"); 
+
+    // categories
     $r->addRoute("categorias", "GET", "CategoryController", "IndexCategory");
+
+    $r->addRoute("admin/categorias", "GET", "CategoryController", "getAdminCategories");
+    $r->addRoute("nuevaCategoria", "POST", "CategoryController", "create");
+
+    $r->addRoute("categorias/editar/:ID", "GET", "CategoryController", "getEdit");
+    $r->addRoute("categorias/actualizar/:ID", "POST", "CategoryController", "update");
+
+    $r->addRoute("categorias/eliminar/:ID", "GET", "CategoryController", "getDelete");
     
-    $r->addRoute("categoria/:ID", "GET", "ActivitiesController", "Home"); 
+    // users
+    $r->addRoute("login", "GET", "UserController", "getLogin");
+    $r->addRoute("login", "POST", "UserController", "logUser");
+    $r->addRoute("admin/cuenta", "GET", "UserController", "getAccount");
 
-    // end mies
+    $r->addRoute("logout", "GET", "UserController", "logout"); // falta implementar
 
-    $r->addRoute("login", "GET", "UserController", "Login");
-    $r->addRoute("logout", "GET", "UserController", "Logout");
-
-    $r->addRoute("verifyUser", "POST", "UserController", "VerifyUser");
-
-    $r->addRoute("mermelada", "GET", "TasksController", "Home");
-
-    //Esto lo veo en TasksView
-    $r->addRoute("insert", "POST", "TasksController", "InsertTask");
-
-    $r->addRoute("delete/:ID", "GET", "TasksController", "BorrarLaTaskQueVienePorParametro");
-    $r->addRoute("completar/:ID", "GET", "TasksController", "MarkAsCompletedTask");
-    $r->addRoute("edit/:ID", "GET", "TasksController", "EditTask");
+    // default route
+    $r->setDefaultRoute("ActivitiesController", "Home");
 
     //Ruta por defecto.
     $r->setDefaultRoute("ActivitiesController", "Home");
 
-    //Advance
-    $r->addRoute("autocompletar", "GET", "TasksAdvanceController", "AutoCompletar");
 
     //run
     $r->route($_GET['action'], $_SERVER['REQUEST_METHOD']); 

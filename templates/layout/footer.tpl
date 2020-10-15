@@ -1,11 +1,15 @@
 
                 
-                <footer class='bg-dark text-white custom-footer '>
-                    <div class='text-center'>
+                <footer class='bg-dark text-white custom-footer'>
+                    <div class='text-center time-right'>
+                      <h5>
                         Let's Travel © 2020
+                      </h5>
                     </div>
-                    <div class='float-right'>
-                      20/20/250
+                    <div class='time-right'>
+                       <h5>
+                         20/20/2250   
+                       </h5>
                     </div>
                 </footer>
                 

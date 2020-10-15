@@ -1,8 +1,25 @@
 body, html {
-    min-width: 100vh !important;
+    min-height: 100vh !important;
+}
+
+.container-body {
+    min-height: 62vh !important;
 }
 
 .custom-footer {
     position: absolute;
-    bottom: 0;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-weight: bold;
+}
+
+.bg-gaston {
+    background-color: blue;
+}
+
+.fw-u {
+    font-size: 20px !important;
 }
