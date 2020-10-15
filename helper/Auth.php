@@ -31,6 +31,10 @@ class Auth {
     }
     
     function isLoggedIn() {
+        if(session_status() == PHP_SESSION_NONE) {
+           session_start();
+        }
+    //      session_start();
         $result = false;
         if(isset($_SESSION["name"], $_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 9000))
             $result = true;

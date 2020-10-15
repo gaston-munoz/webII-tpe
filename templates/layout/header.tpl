@@ -20,15 +20,13 @@
             <body>
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
                    <div class="container p-0">
-                        <a class="navbar-brand" href="home">Let's Travel</a>
+                        <a class="navbar-brand fw-uu mr-4" href="actividades">&#127752; Let's Travel  &#9992;</a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNavDropdown">
                             <ul class="navbar-nav">
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="home-">Home <span class="sr-only">(current)</span></a>
-                                </li>
+
                                 <li class="nav-item">
                                     <a class="nav-link" href="actividades">Actividades</a>
                                 </li>
@@ -38,6 +36,9 @@
                             </ul>
                             <ul class="navbar-nav float-right">
                             {if $session}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="admin/cuenta">Mi cuenta</a>
+                                </li>                                
                                 <li class="nav-item">
                                     <a class="nav-link" href="logout">Logout</a>
                                 </li>

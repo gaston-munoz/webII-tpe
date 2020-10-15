@@ -52,4 +52,11 @@ class ActivitiesView {
         $this->smarty->assign('session', $this->auth->isLoggedIn());
         $this->smarty->display('templates/admin/editActivity.tpl');
     }
+
+    function showError($message) {
+        $this->smarty->assign('title', 'Ups, ocurrio un error...');
+        $this->smarty->assign('message', $message);
+        $this->smarty->assign('session', $this->auth->isLoggedIn());
+        $this->smarty->display('templates/error/error.tpl');
+    }
 }

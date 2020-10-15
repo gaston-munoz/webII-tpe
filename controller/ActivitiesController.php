@@ -54,7 +54,7 @@ class ActivitiesController {
             header('Location:' . BASE_URL . 'admin/actividades');
         }
         else {
-           header('Location:' . BASE_URL . '/admin/actividades');
+            $this->view->showError('Todos los campos son obligatorios');
         }
     }
 
@@ -64,11 +64,9 @@ class ActivitiesController {
         if(isset($id)) {
             if($this->model->remove($id))
                header('Location:' . BASE_URL . '/admin/actividades');
-
         }
         else 
           header('Location:' . BASE_URL . '/admin/actividades');
-
     } 
 
     function getEdit($params = null) {
@@ -82,7 +80,7 @@ class ActivitiesController {
                 $this->view->showEdit($actv, $categories);
             }
             else
-               header('Location:' . BASE_URL . '/admin/actividades');
+              $this->view->showError('No existe la actividad');
 
         }
         else 
@@ -102,12 +100,22 @@ class ActivitiesController {
             $image = $_POST['image'] ;
             
             $isUpdate = $this->model->update($id, $title, $description, $categoryId, $price, $image);
-            var_dump($isUpdate);
             header('Location:' . BASE_URL . 'admin/actividades');
         }
         else {
-           header('Location:' . BASE_URL . '/admin/actividades');
+            $this->view->showError('Todos los campos son obligatorios');
         }
       }
     }
+
+    function error404() {
+        $this->view->showError('Pagina no encontrada - NOT FOUND 404 -');
+    }
+
+    function goBack() {
+        echo "<script>history.go(-2);</script>"; 
+        exit; 
+    }
+
+
 }

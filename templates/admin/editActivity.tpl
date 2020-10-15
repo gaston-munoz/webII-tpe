@@ -10,7 +10,7 @@
             <div class='card-body'>
             <form action='actividades/actualizar/{$activity->id}' method='POST'>
                 <div class='form-group'>
-                  <input type='text' name='title' value={$activity->title} placeholder='Ingrese el titulo' class='form-control' required/>                       
+                  <input type='text' name='title' value='{$activity->title}' placeholder='Ingrese el titulo' class='form-control' required/>                       
                 </div>
                 <div class='form-group'>
                     <textarea rows='3' name='description' placeholder='Ingrese la descripcion' class='form-control' required>{$activity->description}</textarea>                       
@@ -32,11 +32,11 @@
                     </div>                       
                 </div>
                 <div class='form-group'>
-                  <input type='text' name='image' value={$activity->image} placeholder='Ingrese la url de la imagen' class='form-control' required/>                       
+                  <input type='text' name='image' value='{$activity->image}' placeholder='Ingrese la url de la imagen' class='form-control' required/>                       
                 </div>
                 <div class='form-group'>
                     <button type='submit' class='btn btn-success btn-block' >
-                      Guardar
+                      Editar
                     </button>
                 </div>  
             </form>

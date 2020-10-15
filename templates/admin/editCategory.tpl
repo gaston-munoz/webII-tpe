@@ -10,14 +10,14 @@
             <div class='card-body'>
             <form action='categorias/actualizar/{$category->id}' method='POST'>
                 <div class='form-group'>
-                  <input type='text' name='name' value={$category->name} placeholder='Ingrese el Nombre' class='form-control' required/>                       
+                  <input type='text' name='name' value='{$category->name}' class='form-control' required/>                       
                 </div>
                 <div class='form-group'>
-                    <textarea rows='3' name='description' placeholder='Ingrese la descripcion' class='form-control' required>{$category->description}</textarea>                       
+                    <textarea rows='3' name='description' class='form-control' required>{$category->description}</textarea>                       
                 </div>
                 <div class='form-group'>
                     <button type='submit' class='btn btn-success btn-block' >
-                      Guardar
+                      Editar
                     </button>
                 </div>  
             </form>

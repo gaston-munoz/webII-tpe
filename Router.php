@@ -14,7 +14,7 @@
 
     // rutas
     // statics (home)
-    $r->addRoute("home", "GET", "ActivitiesController", "Home");
+    $r->addRoute("actividades", "GET", "ActivitiesController", "Home");
 
     // activities
     $r->addRoute("actividad/:ID", "GET", "ActivitiesController", "Activity");
@@ -46,12 +46,10 @@
 
     $r->addRoute("logout", "GET", "UserController", "logout"); // falta implementar
 
+    $r->addRoute("volver", "GET" , "ActivitiesController", "goBack");
+
     // default route
-    $r->setDefaultRoute("ActivitiesController", "Home");
-
-    //Ruta por defecto.
-    $r->setDefaultRoute("ActivitiesController", "Home");
-
+    $r->setDefaultRoute("ActivitiesController", "error404");
 
     //run
     $r->route($_GET['action'], $_SERVER['REQUEST_METHOD']); 

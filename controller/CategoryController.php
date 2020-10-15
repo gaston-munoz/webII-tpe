@@ -45,12 +45,13 @@ class CategoryController {
         $id = $params[':ID'];
         if(isset($id)) {
             if($this->model->remove($id))
-               header('Location:' . BASE_URL . '/admin/categories');
-
+               header('Location:' . BASE_URL . 'admin/categorias');
+            else 
+              $this->view->showError('No se puede eliminar la categoria porque hay actividades que dependen de ella,
+                debe borrarlas primero');
         }
         else 
-          header('Location:' . BASE_URL . '/admin/categories');
-
+          header('Location:' . BASE_URL . 'admin/categorias');
     } 
 
     function getEdit($params = null) {
@@ -63,11 +64,11 @@ class CategoryController {
                 $this->view->showEdit($cat);
             }
             else
-               header('Location:' . BASE_URL . '/admin/categorias');
+            $this->view->showError('No existe la categoria');
 
         }
         else 
-          die();
+          $this->view->showError('No existe la categoria');
 
     } 
 
@@ -80,8 +81,7 @@ class CategoryController {
             $description = $_POST['description'];
             
             $isUpdate = $this->model->update($id, $name, $description);
-            var_dump($isUpdate);
-           // header('Location:' . BASE_URL . 'admin/categorias');
+            header('Location:' . BASE_URL . 'admin/categorias');
         }
         else {
            header('Location:' . BASE_URL . '/admin/categorias');
