@@ -50,17 +50,101 @@ class UserController {
                 if(password_verify($password, $user->password)){
                     $this->auth->initSession($user);
                     header('Location:'. BASE_URL . 'admin/cuenta');
-                   // $this->view->showAccount();
 				}else{
                     $message = 'Usuario o contraseña incorrectos, prueba de nuevo';
                     $this->view->showLogin($message);
                 }
             }
-          //  header('Location:'. BASE_URL . '/ingresar');
         }
         else {
             $message = 'Ups, todos los campos son requeridos... prueba de nuevo';
             $this->view->showLogin($message);
+        }
+    }
+
+    
+    function getRegistry() {
+        if(!$this->auth->isLoggedIn())
+            $this->view->showRegistry(null);
+        else 
+            header("Location:". BASE_URL . '');     
+    }
+
+    function createUser() {
+        var_dump($_POST['email'],$_POST['name'], $_POST['password']);
+        if(isset($_POST['email'],$_POST['name'], $_POST['password']) ) {
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+            $name = $_POST['name'];
+
+            $existsEmail = $this->model->getUser($email);
+
+            if($existsEmail) {
+                $message = 'El email ya existe, prueba de nuevo';
+                $this->view->showRegistry($message);
+                return;
+            }
+            else {
+                $hashPass = password_hash($password, PASSWORD_DEFAULT);
+                $user = $this->model->save($name, $email, $hashPass);
+                var_dump('USER', $user);
+                $this->auth->initSession($user);
+                $message = 'registro Correcto';
+                header('Location:'. BASE_URL . 'admin/cuenta');
+            }
+        }
+        else {
+            $message = 'Ups, todos los campos son requeridos... prueba de nuevo';
+            $this->view->showRegistry($message);
+        }
+    }
+    
+
+    function getUsersAdmin() {
+        $this->auth->isAdmin();
+        $users = $this->model->getAll();
+        $this->view->showUsers($users);
+    }
+
+
+    function removeUser($params = null) {
+        if(isset($params[':ID'])) {
+            $id = $params[':ID'];
+            $user = $this->model->getById($id);
+            if($user) {
+                $this->model->remove($id);
+                header('Location:' . BASE_URL . 'admin/usuarios');
+                return;
+            }
+        }
+        header('Location:' . BASE_URL . 'admin/usuarios');
+    }
+
+    
+    function markUserAdmin($params = null) {
+        if(isset($params[':ID'])) {
+            $id = $params[':ID'];
+            $user = $this->model->getById($id);
+            if($user) {
+                $this->model->changeIsAdmin($id, '1');
+                header('Location:' . BASE_URL . 'admin/usuarios');
+                return;
+            }
+        }
+        header('Location:' . BASE_URL . 'admin/usuarios');
+    }
+
+    function markUserNoAdmin($params = null) {
+        if(isset($params[':ID'])) {
+            $id = $params[':ID'];
+            $user = $this->model->getById($id);
+            if($user) {
+                $this->model->changeIsAdmin($id, '0');
+                header('Location:' . BASE_URL . 'admin/usuarios');
+            }
+        }
+        else {
+            header('Location:' . BASE_URL . 'admin/usuarios');
         }
     }
 

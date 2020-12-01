@@ -16,6 +16,7 @@ class UserView {
     function showLogin($message) {
         $this->smarty->assign('title', 'Administrador');
         $this->smarty->assign('message', $message);
+        $this->smarty->assign('isAdmin',  $this->auth->isLoggedAsAdmin());
         $this->smarty->assign('session', $this->auth->isLoggedIn());
         $this->smarty->display('templates/user/login.tpl');
     }
@@ -23,8 +24,31 @@ class UserView {
     function showAccount() {
        $user = $_SESSION['name'];
        $this->smarty->assign('user', $user);
+       $this->smarty->assign('isAdmin', $this->auth->isLoggedAsAdmin());
        $this->smarty->assign('session', $this->auth->isLoggedIn());
        $this->smarty->assign('title', 'Bienvenido '. $user);
        $this->smarty->display('templates/user/account.tpl');
     }
+
+    // showRegistry
+
+    function showRegistry($message) {
+        $this->smarty->assign('title', 'Cree su cuenta');
+        $this->smarty->assign('message', $message);
+        $this->smarty->assign('isAdmin', $this->auth->isLoggedAsAdmin());
+        $this->smarty->assign('session', $this->auth->isLoggedIn());
+        $this->smarty->display('templates/user/registry.tpl');
+    }
+
+    
+    function showUsers($users) {
+        $this->smarty->assign('title', $this->title);
+        $this->smarty->assign('users', $users);
+        $this->smarty->assign('isAdmin', $this->auth->isLoggedAsAdmin());
+        $this->smarty->assign('session', $this->auth->isLoggedIn());
+        $this->smarty->display('templates/user/listUsers.tpl');
+    }
+
+
 }
+

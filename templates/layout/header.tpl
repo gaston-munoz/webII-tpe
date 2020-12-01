@@ -15,6 +15,9 @@
             <!-- FOntAwesome -->
             <script src="https://kit.fontawesome.com/065b0452ab.js" crossorigin="anonymous"></script>
 
+            <!-- development version, includes helpful console warnings -->
+            <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
             <title>My page title</title>
             </head>
             <body>
@@ -33,6 +36,11 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="categorias">Categorias</a>
                                 </li>
+                            {if $isAdmin}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="admin/usuarios">Usuarios</a>
+                                </li>
+                            {/if}
                             </ul>
                             <ul class="navbar-nav float-right">
                             {if $session}
@@ -45,6 +53,9 @@
                             {else}
                                 <li class="nav-item">
                                     <a class="nav-link" href="login">Login</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="registrarse">Registrarse</a>
                                 </li>
                             {/if}    
                             </ul>

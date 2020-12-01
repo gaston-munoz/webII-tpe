@@ -12,4 +12,6 @@
         </div>
       </div>
     </div>
+    {include file="../comment/containerComments.tpl"}
+    <script src="js/comments.js"></script>
 {include file="../layout/footer.tpl"}

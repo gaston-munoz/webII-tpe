@@ -44,12 +44,21 @@
     $r->addRoute("login", "POST", "UserController", "logUser");
     $r->addRoute("admin/cuenta", "GET", "UserController", "getAccount");
 
-    $r->addRoute("logout", "GET", "UserController", "logout"); // falta implementar
+    $r->addRoute("registrarse", "GET", "UserController", "getRegistry");
+    $r->addRoute("crear-user", "POST", "UserController", "createUser");
+
+    $r->addRoute("admin/usuarios", "GET" , "UserController", "getUsersAdmin");
+    $r->addRoute("usuario/administrador/:ID", "GET" , "UserController", "markUserAdmin");
+    $r->addRoute("usuario/no-administrador/:ID", "GET" , "UserController", "markUserNoAdmin"); 
+    $r->addRoute("usuario/eliminar/:ID", "GET" , "UserController", "removeUser");
+
+
+    $r->addRoute("logout", "GET", "UserController", "logout"); 
 
     $r->addRoute("volver", "GET" , "ActivitiesController", "goBack");
 
     // default route
-    $r->setDefaultRoute("ActivitiesController", "error404");
+    $r->setDefaultRoute("ActivitiesController", "error404");  
 
     //run
     $r->route($_GET['action'], $_SERVER['REQUEST_METHOD']); 

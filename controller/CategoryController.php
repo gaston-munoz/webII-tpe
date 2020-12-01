@@ -21,13 +21,13 @@ class CategoryController {
     }
 
     function getAdminCategories() {
-        $this->auth->checkLoggedIn();
+        $this->auth->isAdmin();
         $categories = $this->model->getAll();
         $this->view->showAdminCategories($categories);
     }
 
     function create() {
-        $this->auth->checkLoggedIn();
+        $this->auth->isAdmin();
         if(isset($_POST['name'], $_POST['description'])) {
             $name = $_POST['name'];
             $description = $_POST['description'];
@@ -41,7 +41,7 @@ class CategoryController {
     }
 
     function getDelete($params = null) {
-        $this->auth->checkLoggedIn();
+        $this->auth->isAdmin();
         $id = $params[':ID'];
         if(isset($id)) {
             if($this->model->remove($id))
@@ -55,7 +55,7 @@ class CategoryController {
     } 
 
     function getEdit($params = null) {
-        $this->auth->checkLoggedIn();
+        $this->auth->isAdmin();
         $id = $params[':ID'];
         if(isset($id)) {
             $cat = $this->model->getOne($id);
@@ -73,7 +73,7 @@ class CategoryController {
     } 
 
     function update($params = null) {
-      $this->auth->checkLoggedIn();
+      $this->auth->isAdmin();
       $id = $params[':ID'];
       if(isset($id)) {  
         if(isset($_POST['name'], $_POST['description'])) {

@@ -1,7 +1,6 @@
 <?php
 require_once "./model/ActivitiesModel.php";
 require_once "./view/ActivitiesView.php";
-require_once "./model/ActivitiesModel.php"; // mmmmmmm
 
 class ActivitiesController {
 
@@ -35,14 +34,14 @@ class ActivitiesController {
     }
 
     function getAdminActivities() {
-        $this->auth->checkLoggedIn();
+        $this->auth->isAdmin();
         $categories = $this->model->getCategories();
         $activities = $this->model->getAllWithCategories();
         $this->view->showAdminActivities($activities, $categories);
     }
 
     function create() {
-        $this->auth->checkLoggedIn();
+        $this->auth->isAdmin();
         if(isset($_POST['title'], $_POST['description'], $_POST['categoryId'], $_POST['image']) && is_numeric($_POST['price'])) {
             $title = $_POST['title'];
             $description = $_POST['description'];
@@ -59,7 +58,7 @@ class ActivitiesController {
     }
 
     function getDelete($params = null) {
-        $this->auth->checkLoggedIn();
+        $this->auth->isAdmin();
         $id = $params[':ID'];
         if(isset($id)) {
             if($this->model->remove($id))
@@ -70,7 +69,7 @@ class ActivitiesController {
     } 
 
     function getEdit($params = null) {
-        $this->auth->checkLoggedIn();
+        $this->auth->isAdmin();
         $id = $params[':ID'];
         if(isset($id)) {
             $actv = $this->model->getOne($id);
@@ -89,7 +88,7 @@ class ActivitiesController {
     } 
 
     function update($params = null) {
-      $this->auth->checkLoggedIn();
+        $this->auth->isAdmin();
       $id = $params[':ID'];
       if(isset($id)) {  
         if(isset($_POST['title'], $_POST['description'], $_POST['categoryId'], $_POST['image']) && is_numeric($_POST['price'])) {

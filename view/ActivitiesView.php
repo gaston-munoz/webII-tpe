@@ -18,6 +18,7 @@ class ActivitiesView {
         $this->smarty->assign('title', $this->title);
         $this->smarty->assign('activities', $activities);
         $this->smarty->assign('session', $this->auth->isLoggedIn());
+        $this->smarty->assign('isAdmin', $this->auth->isLoggedAsAdmin());
         $this->smarty->display('templates/activity/activities.tpl');
     }
 
@@ -25,13 +26,16 @@ class ActivitiesView {
         $this->smarty->assign('activity', $activity);
         $this->smarty->assign('title', $activity->title);
         $this->smarty->assign('session', $this->auth->isLoggedIn());
+        $this->smarty->assign('isAdmin', $this->auth->isLoggedAsAdmin());
         $this->smarty->display('templates/activity/activity.tpl');
     }
 
     function showActCategory($activities) {
-        $this->smarty->assign('title', 'Actividades de la categoria: ' . $activities[0]->name);
+        $title = $activities && $activities[0] ? 'Actividades de la categoria: ' . $activities[0]->name : 'La categoria no tiene actividades'; 
+        $this->smarty->assign('title', $title);
         $this->smarty->assign('activities', $activities);
         $this->smarty->assign('session', $this->auth->isLoggedIn());
+        $this->smarty->assign('isAdmin', $this->auth->isLoggedAsAdmin());
         $this->smarty->display('templates/activity/activities.tpl');
     }
 
@@ -40,6 +44,7 @@ class ActivitiesView {
         $this->smarty->assign('activities', $activities);
         $this->smarty->assign('categories', $categories);
         $this->smarty->assign('session', $this->auth->isLoggedIn());
+        $this->smarty->assign('isAdmin', $this->auth->isLoggedAsAdmin());
         $this->smarty->display('templates/admin/activities.tpl');
 
     }
@@ -50,6 +55,7 @@ class ActivitiesView {
         $this->smarty->assign('activity', $actv);
         $this->smarty->assign('categories', $categories);
         $this->smarty->assign('session', $this->auth->isLoggedIn());
+        $this->smarty->assign('isAdmin', $this->auth->isLoggedAsAdmin());
         $this->smarty->display('templates/admin/editActivity.tpl');
     }
 
@@ -57,6 +63,7 @@ class ActivitiesView {
         $this->smarty->assign('title', 'Ups, ocurrio un error...');
         $this->smarty->assign('message', $message);
         $this->smarty->assign('session', $this->auth->isLoggedIn());
+        $this->smarty->assign('isAdmin', $this->auth->isLoggedAsAdmin());
         $this->smarty->display('templates/error/error.tpl');
     }
 }

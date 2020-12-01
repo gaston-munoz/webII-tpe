@@ -1,13 +1,34 @@
 <?php
 require_once('./helper/DbHelper.php');
 
-class ActivitiesModel {
+class CommentModel {
     private $dbHelper;
 
     function __construct()  {
-        // $this->db = new PDO('mysql:host=localhost;'.'dbname=lets_travel;charset=utf8', 'root', ''); 
         $this->dbHelper = new DbHelper();
     }
+
+    function getByActivity ($id) {
+        $query = $this->dbHelper->db->prepare("SELECT comment.*, user.name FROM comment INNER JOIN user ON comment.userId = user.id WHERE comment.activityId = ?");
+        $query->execute([$id]);
+        return $query->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    function save($userId, $activityId, $comment, $stars) {
+        $query = $this->dbHelper->db->prepare("INSERT INTO comment (userId, activityId, comment, stars) values (?, ?, ?, ?)");
+        $res = $query->execute([ $userId, $activityId, $comment, $stars ]);
+        return $res;
+    }
+
+    
+    function remove($id) {
+        $query = $this->dbHelper->db->prepare('DELETE FROM comment WHERE id = ?');
+        return $query->execute([ $id ]);
+    }
+
+
+    // old //
+
 
     function getAllWithCategories() {
         $query = $this->dbHelper->db->prepare("SELECT activity.*, category.name  FROM activity INNER JOIN category ON category.id = activity.categoryId");
@@ -28,7 +49,7 @@ class ActivitiesModel {
     }
 
     function getActCategory ($id) {
-        $query = $this->dbHelper->db->prepare("SELECT activity.*, category.name FROM activity INNER JOIN category ON activity.categoryId = category.id WHERE categoryId = ?");
+        $query = $this->dbHelper->db->prepare("SELECT activity.*, category.name FROM activity, category WHERE activity.categoryId = category.id AND categoryId = ?");
         $query->execute([$id]);
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
@@ -39,13 +60,9 @@ class ActivitiesModel {
         return $query->fetchAll(PDO::FETCH_OBJ); 
     }
 
-    function save($title, $description, $categoryId, $price, $image) {
-        $query = $this->dbHelper->db->prepare("INSERT INTO activity (title, description, categoryId, price, image) values (?, ?, ?, ?, ?)");
-        $res = $query->execute([ $title, $description, $categoryId, $price, $image ]);
-        return $res;
-    }
 
-    function remove($id) {
+
+    function rremove($id) {
         $query = $this->dbHelper->db->prepare('DELETE FROM activity WHERE id = ?');
         return $query->execute([ $id ]);
     }

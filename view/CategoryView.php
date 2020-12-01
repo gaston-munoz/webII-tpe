@@ -17,6 +17,7 @@ class CategoryView {
         $this->smarty->assign('title', $this->title);
         $this->smarty->assign('categories', $categories);
         $this->smarty->assign('session', $this->auth->isLoggedIn());
+        $this->smarty->assign('isAdmin', $this->auth->isLoggedAsAdmin());
         $this->smarty->display('templates/category/categories.tpl');
     } 
     
@@ -25,6 +26,7 @@ class CategoryView {
         $this->smarty->assign('title', 'Administra las Categorias');
         $this->smarty->assign('categories', $categories);
         $this->smarty->assign('session', $this->auth->isLoggedIn());
+        $this->smarty->assign('isAdmin', $this->auth->isLoggedAsAdmin());
         $this->smarty->display('templates/admin/categories.tpl');
 
     }
@@ -34,6 +36,7 @@ class CategoryView {
         $this->smarty->assign('title', 'Edita la categoria');
         $this->smarty->assign('category', $category);
         $this->smarty->assign('session', $this->auth->isLoggedIn());
+        $this->smarty->assign('isAdmin', $this->auth->isLoggedAsAdmin());
         $this->smarty->display('templates/admin/editCategory.tpl');
     }
 
@@ -41,6 +44,7 @@ class CategoryView {
         $this->smarty->assign('title', 'Ups, ocurrio un error...');
         $this->smarty->assign('message', $message);
         $this->smarty->assign('session', $this->auth->isLoggedIn());
+        $this->smarty->assign('isAdmin', $this->auth->isLoggedAsAdmin());
         $this->smarty->display('templates/error/error.tpl');
     }
 }
