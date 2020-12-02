@@ -1,5 +1,5 @@
 {include file="../layout/header.tpl"}
-<div class="container container-body">
+<div class="container user-body">
     <table class="table table-bordered table-striped mt-4 mb-5">
         <thead class='table-dark'>
             <tr>

@@ -1,6 +1,6 @@
 {include file="../layout/header.tpl"}
 
-<div class="container  container-body">
+<div class="container container-body">
   <div class='col-md-8 mx-auto'>   
     <div class="card mx-auto text-center">
         <div class='card-header'>

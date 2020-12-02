@@ -83,11 +83,13 @@ class UserController {
             if(strlen($password) < 4) {
                 $message = 'Ups, el password debe tener al menos 4 caracteres... prueba de nuevo';
                 $this->view->showRegistry($message);
+                die();
             }
 
             if(!$this->is_valid_email($email)) {
                 $message = 'Ups, el email no tiene el formato correcto... prueba de nuevo';
                 $this->view->showRegistry($message);
+                die();
             }
 
             $existsEmail = $this->model->getUser($email);
@@ -95,7 +97,7 @@ class UserController {
             if($existsEmail) {
                 $message = 'El email ya existe, prueba de nuevo';
                 $this->view->showRegistry($message);
-                return;
+                die();
             }
             else {
                 $hashPass = password_hash($password, PASSWORD_DEFAULT);

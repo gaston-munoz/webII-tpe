@@ -1,5 +1,5 @@
-body, html {
-    min-height: 100vh !important;
+body, html, .user-body {
+    min-height: 90vh !important;
 }
 
 .container-body {
