@@ -21,7 +21,7 @@ class ActivitiesController {
             $this->view->showActCategory($activities);
         }
         else {
-           $limit = 2;
+           $limit = 3;
            $page = 1;
            if(isset($_GET['page'])) {
                $page = $_GET['page'];
@@ -86,14 +86,26 @@ class ActivitiesController {
 
     function create() {
         $this->auth->isAdmin();
-        if(isset($_POST['title'], $_POST['description'], $_POST['categoryId'], $_POST['image']) && is_numeric($_POST['price'])) {
+        if(isset($_POST['title'], $_POST['description'], $_POST['categoryId']) && is_numeric($_POST['price'])) {
             $title = $_POST['title'];
             $description = $_POST['description'];
             $categoryId = $_POST['categoryId'];
             $price = $_POST['price'];
-            $image = $_POST['image'] ;
 
-            $this->model->save($title, $description, $categoryId, $price, $image);
+            $filePath = '';
+
+            if($_FILES['image']['type'] == "image/jpg" || $_FILES['image']['type'] == "image/jpeg" || $_FILES['image']['type'] == "image/png" || $_FILES['image']['type'] == "image/gif") {
+                $filename = $_FILES['image']['name'];
+                $fileTemp = $_FILES['image']['tmp_name'];
+                $filePath = "uploads/img/" . uniqid("", true) . "." . strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
+                move_uploaded_file($fileTemp, $filePath);
+            }
+            else {
+                $this->view->showError('No ha subido una imagen o tiene un formato incorrecto');
+                die();
+            }
+
+            $this->model->save($title, $description, $categoryId, $price, $filePath);
             header('Location:' . BASE_URL . 'admin/actividades');
         }
         else {
@@ -135,14 +147,28 @@ class ActivitiesController {
         $this->auth->isAdmin();
       $id = $params[':ID'];
       if(isset($id)) {  
-        if(isset($_POST['title'], $_POST['description'], $_POST['categoryId'], $_POST['image']) && is_numeric($_POST['price'])) {
+        if(isset($_POST['title'], $_POST['description'], $_POST['categoryId']) && is_numeric($_POST['price'])) {
             $title = $_POST['title'];
             $description = $_POST['description'];
             $categoryId = $_POST['categoryId'];
             $price = $_POST['price'];
-            $image = $_POST['image'] ;
+
+            $filePath = '';
+
+            var_dump($_FILES, count($_FILES));
+
+            if(count($_FILES) != 0 && ($_FILES['image']['type'] == "image/jpg" || $_FILES['image']['type'] == "image/jpeg" || $_FILES['image']['type'] == "image/png" || $_FILES['image']['type'] == "image/gif")) {
+                $filename = $_FILES['image']['name'];
+                $fileTemp = $_FILES['image']['tmp_name'];
+                $filePath = "uploads/img/" . uniqid("", true) . "." . strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
+                move_uploaded_file($fileTemp, $filePath);
+            }
+            else {
+                $this->view->showError('No ha subido una imagen o tiene un formato incorrecto');
+                die();
+            }
             
-            $isUpdate = $this->model->update($id, $title, $description, $categoryId, $price, $image);
+            $isUpdate = $this->model->update($id, $title, $description, $categoryId, $price, $filePath);
             header('Location:' . BASE_URL . 'admin/actividades');
         }
         else {

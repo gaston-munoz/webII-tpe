@@ -59,11 +59,16 @@ async function getComments() {
 
 function createComment(event) {
     event.preventDefault();
+    const text = document.querySelector('#comment');
+    const stars = document.querySelector('#stars');
+    if(text.value === '' || stars.value === '')
+       return;
+       
     const comment = {
         activityId: app.activity,
         userId: app.userId,
-        comment: document.querySelector('#comment').value,
-        stars: document.querySelector('#stars').value
+        comment: text.value,
+        stars: stars.value
 
     }
 
@@ -72,6 +77,10 @@ function createComment(event) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(comment)
     })
-      .then(() => {getComments()})
+      .then(() => {
+          getComments();
+          text.value = '';
+          stars.value = '';
+        })
       .catch(error => console.log(error));
 }

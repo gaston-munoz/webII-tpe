@@ -8,7 +8,7 @@
                 </h3>   
             </div>
             <div class='card-body'>
-            <form action='actividades/actualizar/{$activity->id}' method='POST'>
+            <form action='actividades/actualizar/{$activity->id}' method='POST' enctype="multipart/form-data">
                 <div class='form-group'>
                   <input type='text' name='title' value='{$activity->title}' placeholder='Ingrese el titulo' class='form-control' required/>                       
                 </div>
@@ -31,13 +31,23 @@
                         </select>
                     </div>                       
                 </div>
-                <div class='form-group'>
-                  <input type='text' name='image' value='{$activity->image}' placeholder='Ingrese la url de la imagen' class='form-control' required/>                       
+
+                <div class='form-group text-center'>
+                  <span>
+                    Imagen actual
+                  </span>
+                  <img src='{$activity->image}' class="img-thumbnail">
                 </div>
+
+                <div class='custom-file mb-3'>
+                  <input type='file' name='image' id='image' class="custom-file-input"/> 
+                  <label class="custom-file-label " for="validatedCustomFile">Cambia la imagen</label>                      
+                </div>
+
                 <div class='form-group'>
-                    <button type='submit' class='btn btn-success btn-block' >
-                      Editar
-                    </button>
+                  <button type='submit' class='btn btn-success btn-block' >
+                    Editar
+                  </button>
                 </div>  
             </form>
             </div>

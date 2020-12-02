@@ -44,7 +44,7 @@
                 </h3>   
             </div>
             <div class='card-body'>
-            <form action='nuevaActividad' method='POST'>
+            <form action='nuevaActividad' method='POST' enctype="multipart/form-data">
                 <div class='form-group'>
                   <input type='text' name='title' placeholder='Ingrese el titulo' class='form-control' required/>                       
                 </div>
@@ -59,13 +59,14 @@
                         <select class="custom-select" name='categoryId' id="inputGroupSelect01" required>
                             <option >Elige una categoria</option>
                             {foreach from=$categories item=category }   
-                                <option value={$category->id}>{$category->name} {$category->id}</option>
+                                <option value={$category->id}>{$category->name}</option>
                             {/foreach}  
                         </select>
                     </div>                       
                 </div>
-                <div class='form-group'>
-                  <input type='text' name='image' placeholder='Ingrese la url de la imagen' class='form-control' required/>                       
+                <div class='custom-file mb-3'>
+                  <input type='file' name='image' id='image' class="custom-file-input"/> 
+                  <label class="custom-file-label " for="validatedCustomFile">Suba una imagen</label>                      
                 </div>
                 <div class='form-group'>
                     <button class='btn btn-success btn-block' >

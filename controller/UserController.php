@@ -70,12 +70,25 @@ class UserController {
             header("Location:". BASE_URL . '');     
     }
 
+    function is_valid_email($email) {
+        return (false !== filter_var($email, FILTER_VALIDATE_EMAIL));
+    }
+
     function createUser() {
-        var_dump($_POST['email'],$_POST['name'], $_POST['password']);
-        if(isset($_POST['email'],$_POST['name'], $_POST['password']) ) {
+        if(isset($_POST['email'],$_POST['name'], $_POST['password']) && ($_POST['email'] !== '' && $_POST['name'] !== '' && $_POST['password'] !== '') ) {
             $email = $_POST['email'];
             $password = $_POST['password'];
             $name = $_POST['name'];
+
+            if(strlen($password) < 4) {
+                $message = 'Ups, el password debe tener al menos 4 caracteres... prueba de nuevo';
+                $this->view->showRegistry($message);
+            }
+
+            if(!$this->is_valid_email($email)) {
+                $message = 'Ups, el email no tiene el formato correcto... prueba de nuevo';
+                $this->view->showRegistry($message);
+            }
 
             $existsEmail = $this->model->getUser($email);
 
