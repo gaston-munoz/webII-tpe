@@ -32,8 +32,6 @@ async function getData() {
     app.userId = user ? user : '';
     app.activity = activity ? activity : '';
 
-    console.log(user, activity, isAdmin ? 'true' : 'false');
-
     if(app.userId){
         document.querySelector('#btn-create-comment').addEventListener('click', event => {createComment(event)});
     }
@@ -45,12 +43,10 @@ async function getComments() {
     try {
         let comments = [];    
         const response = await fetch(`api/comentarios/${app.activity}`);
-        console.log(response)
         if(response.ok)  {
             comments = await response.json();
             app.comments = comments;
         }   
-        console.log('COMMENTS', app.comments);
     } catch (error) {
         console.log(error)
     }
