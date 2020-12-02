@@ -15,10 +15,13 @@
     // rutas
     // statics (home)
     $r->addRoute("actividades", "GET", "ActivitiesController", "Home");
+    $r->addRoute("home", "GET", "ActivitiesController", "Home");
 
     // activities
     $r->addRoute("actividad/:ID", "GET", "ActivitiesController", "Activity");
     $r->addRoute("actividades/categoria/:ID", "GET", "ActivitiesController", "Home"); 
+
+    $r->addRoute("busqueda", "GET", "ActivitiesController", "getSearch"); 
 
     $r->addRoute("admin/actividades", "GET", "ActivitiesController", "getAdminActivities");
     $r->addRoute("nuevaActividad", "POST", "ActivitiesController", "create");

@@ -21,11 +21,55 @@ class ActivitiesController {
             $this->view->showActCategory($activities);
         }
         else {
-           $activities = $this->model->getAllWithCategories();
-           $this->view->showActivities($activities);
+           $limit = 2;
+           $page = 1;
+           if(isset($_GET['page'])) {
+               $page = $_GET['page'];
+           }
+           $offset = ($page - 1) * $limit;
+           $totalActivities = $this->model->getAllWithCategories();
+           $activities = $this->model->getAllWithCategoriesPaginate($offset, $limit);
+           $this->view->showActivities($activities, $page, ceil(count($totalActivities) / $limit));
         }
-
     }
+
+
+    function getSearch() {
+        if(isset($_GET['text'], $_GET['min'], $_GET['max'])) {
+            $text = $_GET['text'];
+            $min = intval($_GET['min']);
+            $max = intval($_GET['max']);
+
+            $activities = $this->model->getSearchWithCategories($text, $min, $max);
+            $this->view->showActivitiesSearch($activities);
+        }
+        else {
+
+            header('Location:' . BASE_URL . '/actividades');
+        }
+    }
+
+    /*
+    function getSearchPaginate() {
+        if(isset($_GET['text'], $_GET['min'], $_GET['max'])) {
+            $text = $_GET['text'];
+            $min = intval($_GET['min']);
+            $max = intval($_GET['max']);
+            
+            $page = 1;
+            $limit = 2;
+            $offset = ($page - 1) * $limit;
+            $totalActivities = $this->model->getSearchWithCategories($text, $min, $max);
+
+            $activities = $this->model->getSearchWithCategoriesPaginate($text, $min, $max, $offset, $limit);
+            $this->view->showActivities($activities, $page, ceil(count($totalActivities) / $limit), 'Resultado de la busqueda');
+        }
+        else {
+
+            header('Location:' . BASE_URL . '/actividades');
+        }
+    }
+*/
 
     function Activity($params = null) {
         $id = $params[':ID'];

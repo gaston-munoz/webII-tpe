@@ -14,6 +14,26 @@ class ActivitiesModel {
         $query->execute();
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
+
+    function getSearchWithCategories($text, $min, $max) {
+        $query = $this->dbHelper->db->prepare("SELECT activity.*, category.name  FROM activity INNER JOIN category ON category.id = activity.categoryId WHERE title REGEXP ? AND price >= ? AND price <= ?");
+        $query->execute([ "$text", $min, $max ]);
+        $activities = $query->fetchAll(PDO::FETCH_OBJ);
+        return $activities;
+    }
+/*
+    function getSearchWithCategoriesPaginate($text, $min, $max, $offset, $limit) {
+        $query = $this->dbHelper->db->prepare("SELECT activity.*, category.name  FROM activity INNER JOIN category ON category.id = activity.categoryId WHERE title REGEXP ? AND price >= ? AND price <= ? LIMIT $offset, $limit");
+        $query->execute([ "$text", $min, $max ]);
+        $activities = $query->fetchAll(PDO::FETCH_OBJ);
+        return $activities;
+    }
+*/
+    function getAllWithCategoriesPaginate($offset, $limit) {
+        $query = $this->dbHelper->db->prepare("SELECT activity.*, category.name  FROM activity INNER JOIN category ON category.id = activity.categoryId LIMIT $offset, $limit");
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_OBJ);
+    }
     
     function getAll() {
         $query = $this->dbHelper->db->prepare("SELECT * FROM activity");

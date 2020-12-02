@@ -14,12 +14,25 @@ class ActivitiesView {
         $this->auth = new Auth();
     }
 
-    function showActivities($activities) {
+    function showActivities($activities, $page, $totalPages) {
         $this->smarty->assign('title', $this->title);
+        $this->smarty->assign('activities', $activities);
+        $this->smarty->assign('page', $page);
+        $this->smarty->assign('totalPages', $totalPages);
+        $this->smarty->assign('session', $this->auth->isLoggedIn());
+        $this->smarty->assign('isAdmin', $this->auth->isLoggedAsAdmin());
+        $this->smarty->display('templates/activity/activities.tpl');  
+    }
+
+    // showActivitiesSearch($activities)
+
+    
+    function showActivitiesSearch($activities) {
+        $this->smarty->assign('title', 'Resultados de la busqueda');
         $this->smarty->assign('activities', $activities);
         $this->smarty->assign('session', $this->auth->isLoggedIn());
         $this->smarty->assign('isAdmin', $this->auth->isLoggedAsAdmin());
-        $this->smarty->display('templates/activity/activities.tpl');
+        $this->smarty->display('templates/activity/activitiesSearch.tpl');  
     }
 
     function showActivity($activity) {

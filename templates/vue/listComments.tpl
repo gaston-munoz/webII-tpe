@@ -1,7 +1,7 @@
 {literal}
 <div id="root">
 
-    <ul id="task-list" class="list-group">
+    <ul v-if="comments.length" id="task-list" class="list-group">
         <li 
             v-for="comment in comments"
             :data-id-task="comment.id" 
@@ -19,6 +19,9 @@
             </button>
          </li>
     </ul>
+    <p v-else>
+        &nbsp;&nbsp; Esta actividad no tiene comentarios aún
+    </p>
 
 </div>
 {/literal}
